@@ -7,32 +7,37 @@
     <title>Book Library</title>
 </head>
 <body>
+    <div id="header">
+      <h1>My Library</h1>
+    </div>
+    
+    <div id="newBookFormContainer">
 
-    <header>
-        <h1>Book Library</h1>
-      </header>
+        <button id="newBookBtn">New Book</button>
+
+        <form id="newBookForm">
+          <label for="title">Title</label>
+          <input type="text" id="title" required>
       
-      <main>
-        <div class="wrapper">
-          <div class="adding-sec">
-            <h3>Add Book</h3>
-            <form id="addBookForm">
-              <label for="book-name">Book Name:</label>
-              <input type="text" id="book-name" name="book-name" required><br><br>
-              <label for="book-price">Book Price:</label>
-              <input type="text" id="book-price" name="book-price" required><br><br>
-              <label for="image-upload">Upload Image:</label>
-              <input type="file" id="image-upload" name="image-upload" required><br><br>
-              <button type="submit">Add Book</button>
-            </form>
-          </div>
-          <div class="Library" id="bookContainer"></div>
-        </div>
-      </main>
+          <label for="author">Author</label>
+          <input type="text" id="author" required>
       
-      <footer></footer>
-
-
+          <label for="pages">Pages</label>
+          <input type="number" id="pages" required>
+      
+          <label for="read">Read</label>
+          <input type="checkbox" id="read">
+      
+          <button id="addBookBtn" class="addBookBtn">Add Book</button>
+        </form>
+    </div>
+    
+    <div id="bookContainer"></div>
+    
+    
+    <div id="footer">
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
+  
 </html>

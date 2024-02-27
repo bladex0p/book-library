@@ -1,48 +1,80 @@
-
-
-
-
-document.getElementById("addBookForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const bookName = document.getElementById("book-name").value;
-    const bookPrice = document.getElementById("book-price").value;
-    const bookImage = document.getElementById("image-upload").files[0];
+function Book(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
   
-    const bookDiv = document.createElement("div");
-
-    bookDiv.classList.add("book-item");
+  Book.prototype.toggleReadStatus = function() {
+    this.read = !this.read;
+  }
   
-    const img = document.createElement("img");
-
-    img.src = URL.createObjectURL(bookImage);
-    img.alt = bookName;
-    img.style.width = "100%";
+  const myLibrary = [];
   
-    const nameParagraph = document.createElement("p");
-
-    nameParagraph.textContent = "Name: " + bookName;
-
+  function displayBooks() {
+    const bookContainer = document.getElementById('bookContainer');
+    bookContainer.innerHTML = '';
   
-    const priceParagraph = document.createElement("p");
-
-    priceParagraph.textContent = "Price: $" + bookPrice;
+    myLibrary.forEach((book, index) => {
+      const bookItem = document.createElement('div');
+      bookItem.classList.add('book-item');
+      bookItem.innerHTML = `
+        <p>Title: ${book.title}</p>
+        <p>Author: ${book.author}</p>
+        <p>Pages: ${book.pages}</p>
+        <p>Read: ${book.read ? 'Yes' : 'No'}</p>
+        <button class="toggle-read-btn" data-index="${index}">Toggle Read Status</button>
+        <button class="remove-btn" data-index="${index}">Remove</button>
+      `;
+      bookContainer.appendChild(bookItem);
+    });
+  }
   
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.classList.add("remove-btn");
-    removeButton.onclick = function() {
-      bookDiv.remove();
-    };
+  function addBookToLibrary(title, author, pages, read) {
+    const newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+    displayBooks();
+  }
   
-    bookDiv.appendChild(img);
-    bookDiv.appendChild(nameParagraph);
-    bookDiv.appendChild(priceParagraph);
-    bookDiv.appendChild(removeButton);
-  
-    document.getElementById("bookContainer").appendChild(bookDiv);
-  
-    document.getElementById("addBookForm").reset();
-
-    
+  const newBookBtn = document.getElementById('newBookBtn');
+  newBookBtn.addEventListener('click', () => {
+    const newBookForm = document.getElementById('newBookForm');
+    newBookForm.style.display = 'block';
   });
+  
+  const addBookBtn = document.getElementById('addBookBtn');
+  addBookBtn.addEventListener('click', () => {
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').checked;
+  
+    addBookToLibrary(title, author, pages, read);
+  
+    document.getElementById('title').value = '';
+    document.getElementById('author').value = '';
+    document.getElementById('pages').value = '';
+    document.getElementById('read').checked = false;
+  
+    const newBookForm = document.getElementById('newBookForm');
+    newBookForm.style.display = 'none';
+  });
+  
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('toggle-read-btn')) {
+      const index = event.target.dataset.index;
+      myLibrary[index].toggleReadStatus();
+      displayBooks();
+    }
+  });
+  
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remove-btn')) {
+      const index = event.target.dataset.index;
+      myLibrary.splice(index, 1);
+      displayBooks();
+    }
+  });
+  
+  displayBooks();
   
