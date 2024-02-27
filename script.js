@@ -43,11 +43,19 @@ function Book(title, author, pages, read) {
   });
   
   const addBookBtn = document.getElementById('addBookBtn');
-  addBookBtn.addEventListener('click', () => {
+  addBookBtn.addEventListener('click', (event) => {
+    event.preventDefault(); 
+  
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
     const read = document.getElementById('read').checked;
+  
+    
+    if (!title || !author || !pages) {
+      alert('Please fill in all required fields.'); 
+      return; 
+    }
   
     addBookToLibrary(title, author, pages, read);
   
@@ -59,6 +67,7 @@ function Book(title, author, pages, read) {
     const newBookForm = document.getElementById('newBookForm');
     newBookForm.style.display = 'none';
   });
+  
   
   document.addEventListener('click', (event) => {
     if (event.target.classList.contains('toggle-read-btn')) {
