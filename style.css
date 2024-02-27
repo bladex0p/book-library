@@ -11,6 +11,8 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    justify-content: center;
+    align-items: center;
   }
 
   p {
@@ -22,6 +24,7 @@
     padding: 20px;
     position: sticky;
     top: 0;
+    width: 100%;
     z-index: 1000;
     background: #EF4444;
     background: -moz-linear-gradient(left, #EF4444 0%, #D33C3C 39%, #A02D2D 100%);
@@ -34,6 +37,7 @@
     padding: 20px;
     text-align: center;
     margin-top: auto;
+    width: 100%;
     background: #EF4444;
     background: -moz-linear-gradient(left, #EF4444 0%, #D33C3C 39%, #A02D2D 100%);
     background: -webkit-linear-gradient(left, #EF4444 0%, #D33C3C 39%, #A02D2D 100%);
@@ -62,6 +66,8 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 20px;
     padding: 20px;
+    width: 95%;
+    border: 1px solid black;
   }
   
 
